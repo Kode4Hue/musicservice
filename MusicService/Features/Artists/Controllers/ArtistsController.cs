@@ -1,8 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MusicService.Features.Artists.CommandAndQueries.AddArtist;
+using MusicService.Features.Artists.CommandAndQueries.DeleteSingleArtist;
 using MusicService.Features.Artists.CommandAndQueries.GetArtists;
 using MusicService.Features.Artists.CommandAndQueries.GetSingleArtist;
+using MusicService.Features.Common;
 using MusicService.Features.Common.Controllers;
 using MusicService.SharedLibrary.Artists.Dtos;
 
@@ -36,7 +38,7 @@ namespace MusicService.Features.Artists.Controllers
             };
             var artist = await Mediator.Send(query);
 
-            if(artist is not null)
+            if (artist is not null)
             {
                 return Ok(new ArtistDto { });
             }
@@ -58,10 +60,36 @@ namespace MusicService.Features.Artists.Controllers
             return CreatedAtAction(nameof(GetSingleArtist), createdArtist);
         }
 
-        //[HttpGet("{id}")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //public async Task<IActionResult> DeleteSingleArtist(long id)
+
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> UpdateArtist(long id, ArtistDto updateArtist)
         //{
+
         //}
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeleteSingleArtist(long id)
+        {
+            try
+            {
+                var command = new DeleteSingleArtistCommand
+                {
+                    Id = id
+                };
+                await Mediator.Send(command);
+                return Ok($"Deleted artist with id {id}");
+            }
+            catch(ResourceNotFoundException ex)
+            {
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+    }
+
 }
