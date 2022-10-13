@@ -17,6 +17,24 @@ namespace MusicService.Features.Artists.Extensions
             };
         }
 
+        public static Artist UpdateModelFromDto(this Artist artist, ArtistDto incomingUpdates)
+        {
+            if(artist is null)
+            {
+                throw new ArgumentException(nameof(artist));
+            }
+
+            if(incomingUpdates is null)
+            {
+                throw new ArgumentNullException(nameof(incomingUpdates));
+            }
+
+            artist.Name = incomingUpdates.Name;
+            artist.LastModified = DateTime.UtcNow;
+
+            return artist;
+        }
+
         public static Artist GenerateNewModel(this NewArtistDto artist)
         {
             if(artist is null)

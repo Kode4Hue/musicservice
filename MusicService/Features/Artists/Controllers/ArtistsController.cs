@@ -61,11 +61,11 @@ namespace MusicService.Features.Artists.Controllers
         }
 
 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> UpdateArtist(long id, ArtistDto updateArtist)
-        //{
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateArtist(long id, ArtistDto updateArtist)
+        {
 
-        //}
+        }
 
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
