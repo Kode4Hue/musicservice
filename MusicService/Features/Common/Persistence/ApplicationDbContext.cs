@@ -22,6 +22,8 @@ namespace MusicService.Features.Common.Persistence
                 .Configure(x =>
                 {
                     x.HasKey(a => a.Id);
+                    x.Property(a => a.Id)
+                        .ValueGeneratedOnAdd();
                     x.Property(a => a.Name)
                         .IsRequired();
                     x.Property(a => a.Created)
@@ -34,6 +36,8 @@ namespace MusicService.Features.Common.Persistence
                 .Configure(x =>
                 {
                     x.HasKey(a => a.Id);
+                    x.Property(a => a.Id)
+                        .ValueGeneratedOnAdd();
                     x.Property(a => a.Name)
                         .IsRequired();
                     x.Property(a => a.YearReleased)
@@ -51,6 +55,8 @@ namespace MusicService.Features.Common.Persistence
                 .Configure(x =>
                 {
                     x.HasKey(a => a.Id);
+                    x.Property(a => a.Id)
+                        .ValueGeneratedOnAdd();
                     x.Property(a => a.Track)
                         .IsRequired();
                     x.Property(a => a.Name)
