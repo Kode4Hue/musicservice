@@ -11,8 +11,7 @@ using MusicService.SharedLibrary.Artists.Dtos;
 
 namespace MusicService.Features.Artists.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
+
     public class ArtistsController : BaseApiController
     {
         public ArtistsController(ISender mediator) : base(mediator)
