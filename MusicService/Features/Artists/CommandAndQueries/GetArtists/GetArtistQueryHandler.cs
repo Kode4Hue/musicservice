@@ -6,7 +6,7 @@ using MusicService.SharedLibrary.Artists.Dtos;
 
 namespace MusicService.Features.Artists.CommandAndQueries.GetArtists
 {
-    public class GetArtistQueryHandler : IRequestHandler<GetArtistsQuery, IList<ArtistDto>>
+    public class GetArtistQueryHandler : IRequestHandler<GetArtistsQuery, List<ArtistDto>>
     {
 
         private readonly ApplicationDbContext _dbContext;
@@ -16,7 +16,7 @@ namespace MusicService.Features.Artists.CommandAndQueries.GetArtists
             _dbContext = dbContext;
         }
 
-        public async Task<IList<ArtistDto>> Handle(GetArtistsQuery request, CancellationToken cancellationToken)
+        public async Task<List<ArtistDto>> Handle(GetArtistsQuery request, CancellationToken cancellationToken)
         {
             var artists = await _dbContext.Artists
                 .Select(x => x.ConvertToDto())

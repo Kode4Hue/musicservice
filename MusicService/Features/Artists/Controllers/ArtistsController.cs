@@ -11,6 +11,7 @@ using MusicService.SharedLibrary.Artists.Dtos;
 
 namespace MusicService.Features.Artists.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class ArtistsController : BaseApiController
     {
@@ -58,17 +59,20 @@ namespace MusicService.Features.Artists.Controllers
                 NewArtist = newArtist
             };
             var createdArtist = await Mediator.Send(command);
-            return CreatedAtAction(nameof(GetSingleArtist), createdArtist);
+            var actionName = nameof(GetSingleArtist);
+            var routeValues = new { id = createdArtist.Id };
+            return CreatedAtAction( actionName,routeValues, createdArtist);
         }
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateArtist(long id, ArtistDto updateArtist)
+        public async Task<IActionResult> UpdateArtist(long id, UpdateArtistDto updateArtist)
         {
             try
             {
                 var command = new UpdateSingleArtistCommand
                 {
+                    Id = id,
                     ArtistToUpdate = updateArtist
                 };
                 var updatedArtist = await Mediator.Send(command);

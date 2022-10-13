@@ -19,11 +19,10 @@ namespace MusicService.Features.Artists.CommandAndQueries.UpdateSingleArtist
 
         public async Task<ArtistDto> Handle(UpdateSingleArtistCommand request, CancellationToken cancellationToken)
         {
-
-            var artist = await _dbContext.Artists.FindAsync(request.ArtistToUpdate.Id, cancellationToken);
+            var artist = await _dbContext.Artists.FindAsync(new object[] {request.Id}, cancellationToken);
             if (artist is not null)
             {
-                var artistModel = artist.UpdateModelFromDto(request.ArtistToUpdate);
+                artist = artist.UpdateModelFromDto(request.ArtistToUpdate);
                 _dbContext.Entry(artist).State = EntityState.Modified;
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return artist.ConvertToDto();

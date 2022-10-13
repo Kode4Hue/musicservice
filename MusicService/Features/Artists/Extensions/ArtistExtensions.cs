@@ -17,7 +17,7 @@ namespace MusicService.Features.Artists.Extensions
             };
         }
 
-        public static Artist UpdateModelFromDto(this Artist artist, ArtistDto incomingUpdates)
+        public static Artist UpdateModelFromDto(this Artist artist, UpdateArtistDto incomingUpdates)
         {
             if(artist is null)
             {
