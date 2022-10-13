@@ -6,5 +6,7 @@ namespace MusicService.Features.Music.Domain.Entities
     {
         public int Track { get; set; }
         public string Name { get; set; } = string.Empty;
+        public long AlbumId { get; set; }
+        public Album Album { get; set; }
     }
 }
