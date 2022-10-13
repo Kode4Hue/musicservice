@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace MusicService.SharedLibrary.Artists.Dtos
 {
-    public class UpdateArtistDto
+    public class ArtistPreviewDto
     {
+        public long Id { get; set; }
         public string Name { get; set; } = string.Empty;
     }
 }

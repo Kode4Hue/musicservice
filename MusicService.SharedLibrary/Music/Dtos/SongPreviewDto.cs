@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MusicService.SharedLibrary.Artists.Dtos
+namespace MusicService.SharedLibrary.Music.Dtos
 {
-    public class UpdateArtistDto
+    public class SongPreviewDto
     {
+        public long Id { get; set; }
         public string Name { get; set; } = string.Empty;
     }
 }
