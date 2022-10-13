@@ -12,8 +12,8 @@ using MusicService.Features.Common.Persistence;
 namespace MusicService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221013185426_InitialMigrations")]
-    partial class InitialMigrations
+    [Migration("20221013201535_InitialSchema")]
+    partial class InitialSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

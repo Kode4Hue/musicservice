@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MusicService.Migrations
 {
-    public partial class InitialMigrations : Migration
+    public partial class InitialSchema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
