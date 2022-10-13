@@ -4,6 +4,7 @@ using MusicService.Features.Artists.CommandAndQueries.AddArtist;
 using MusicService.Features.Artists.CommandAndQueries.DeleteSingleArtist;
 using MusicService.Features.Artists.CommandAndQueries.GetArtists;
 using MusicService.Features.Artists.CommandAndQueries.GetSingleArtist;
+using MusicService.Features.Artists.CommandAndQueries.UpdateSingleArtist;
 using MusicService.Features.Common;
 using MusicService.Features.Common.Controllers;
 using MusicService.SharedLibrary.Artists.Dtos;
@@ -64,7 +65,24 @@ namespace MusicService.Features.Artists.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateArtist(long id, ArtistDto updateArtist)
         {
+            try
+            {
+                var command = new UpdateSingleArtistCommand
+                {
+                    ArtistToUpdate = updateArtist
+                };
+                var updatedArtist = await Mediator.Send(command);
+                return Ok(updatedArtist);
+            }
+            catch (ResourceNotFoundException)
+            {
 
+                return NotFound();
+            }
+            catch(Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [HttpDelete("{id}")]
@@ -81,11 +99,11 @@ namespace MusicService.Features.Artists.Controllers
                 await Mediator.Send(command);
                 return Ok($"Deleted artist with id {id}");
             }
-            catch(ResourceNotFoundException ex)
+            catch(ResourceNotFoundException)
             {
                 return NotFound();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
