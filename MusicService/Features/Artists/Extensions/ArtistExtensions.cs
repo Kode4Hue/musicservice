@@ -16,5 +16,22 @@ namespace MusicService.Features.Artists.Extensions
                 Albums = artist.Albums.Select(x => x.ConvertToPreviewDto())
             };
         }
+
+        public static Artist GenerateNewModel(this NewArtistDto artist)
+        {
+            if(artist is null)
+            {
+                throw new ArgumentNullException(nameof(artist));
+            }
+
+            var currentDate = DateTime.UtcNow;
+
+            return new Artist
+            {
+                Name = artist.Name,
+                Created = currentDate,
+                LastModified = currentDate
+            };
+        }
     }
 }
