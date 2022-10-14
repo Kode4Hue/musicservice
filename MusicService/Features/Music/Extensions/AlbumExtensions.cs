@@ -16,7 +16,9 @@ namespace MusicService.Features.Music.Extensions
                 Id = album.Id,
                 Name = album.Name,
                 YearReleased = album.YearReleased.ToString(),
-                Artist = album.Artist.ConvertToPreviewDto()
+                Artist = album.Artist.ConvertToPreviewDto(),
+                Created = album.Created,
+                LastModified = album.LastModified
             };
         }
 
