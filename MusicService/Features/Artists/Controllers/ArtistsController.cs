@@ -31,13 +31,13 @@ namespace MusicService.Features.Artists.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ArtistDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetSingleArtist(long id)
+        public async Task<IActionResult> GetSingleArtist(long id, CancellationToken cancellationToken)
         {
             var query = new GetSingleArtistQuery
             {
                 Id = id
             };
-            var artist = await Mediator.Send(query);
+            var artist = await Mediator.Send(query, cancellationToken);
 
             if (artist is not null)
             {
@@ -51,13 +51,13 @@ namespace MusicService.Features.Artists.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ArtistDto))]
-        public async Task<IActionResult> AddArtist(NewArtistDto newArtist)
+        public async Task<IActionResult> AddArtist(NewArtistDto newArtist, CancellationToken cancellationToken)
         {
             var command = new AddArtistCommand
             {
                 NewArtist = newArtist
             };
-            var createdArtist = await Mediator.Send(command);
+            var createdArtist = await Mediator.Send(command, cancellationToken);
             var actionName = nameof(GetSingleArtist);
             var routeValues = new { id = createdArtist.Id };
             return CreatedAtAction( actionName,routeValues, createdArtist);
@@ -65,7 +65,7 @@ namespace MusicService.Features.Artists.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateArtist(long id, UpdateArtistDto updateArtist)
+        public async Task<IActionResult> UpdateArtist(long id, UpdateArtistDto updateArtist, CancellationToken cancellationToken)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace MusicService.Features.Artists.Controllers
                     Id = id,
                     ArtistToUpdate = updateArtist
                 };
-                var updatedArtist = await Mediator.Send(command);
+                var updatedArtist = await Mediator.Send(command, cancellationToken);
                 return Ok(updatedArtist);
             }
             catch (ResourceNotFoundException)
@@ -91,7 +91,7 @@ namespace MusicService.Features.Artists.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteSingleArtist(long id)
+        public async Task<IActionResult> DeleteSingleArtist(long id, CancellationToken cancellationToken)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace MusicService.Features.Artists.Controllers
                 {
                     Id = id
                 };
-                await Mediator.Send(command);
+                await Mediator.Send(command, cancellationToken);
                 return Ok($"Deleted artist with id {id}");
             }
             catch(ResourceNotFoundException)
