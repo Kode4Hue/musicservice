@@ -13,7 +13,9 @@ namespace MusicService.Features.Artists.Extensions
             {
                 Id = artist.Id,
                 Name = artist.Name,
-                Albums = artist.Albums.Select(x => x.ConvertToPreviewDto())
+                Albums = artist.Albums.Select(x => x.ConvertToPreviewDto()),
+                Created = artist.Created,
+                LastModified = artist.LastModified
             };
         }
 
