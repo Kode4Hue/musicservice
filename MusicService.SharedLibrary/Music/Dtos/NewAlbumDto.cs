@@ -9,6 +9,7 @@ namespace MusicService.SharedLibrary.Music.Dtos
     public class NewAlbumDto
     {
         public string Name { get; set; } = string.Empty;
-        public long ArtistId { get; set; }
+        public long? ArtistId { get; set; }
+        public int? YearReleased { get; set; }
     }
 }

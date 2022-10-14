@@ -1,4 +1,5 @@
 ﻿using MusicService.Features.Artists.Domain.Entities;
+using MusicService.Features.Artists.Extensions;
 using MusicService.Features.Music.Domain.Entities;
 using MusicService.SharedLibrary.Music.Dtos;
 
@@ -13,7 +14,8 @@ namespace MusicService.Features.Music.Extensions
             {
                 Id = album.Id,
                 Name = album.Name,
-                YearReleased = album.YearReleased.ToString()
+                YearReleased = album.YearReleased.ToString(),
+                Artist = album.Artist.ConvertToPreviewDto()
             };
         }
 
@@ -44,6 +46,7 @@ namespace MusicService.Features.Music.Extensions
             return new Album
             {
                 Name = album.Name,
+                YearReleased = album.YearReleased.Value,
                 Created = currentDate,
                 LastModified = currentDate,
                 Artist = artist

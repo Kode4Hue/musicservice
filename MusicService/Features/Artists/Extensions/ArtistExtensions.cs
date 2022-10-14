@@ -17,6 +17,15 @@ namespace MusicService.Features.Artists.Extensions
             };
         }
 
+        public static ArtistPreviewDto ConvertToPreviewDto(this Artist artist)
+        {
+            return new ArtistPreviewDto
+            {
+                Id = artist.Id,
+                Name = artist.Name
+            };
+        }
+
         public static Artist UpdateModelFromDto(this Artist artist, UpdateArtistDto incomingUpdates)
         {
             if(artist is null)

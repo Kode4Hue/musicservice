@@ -20,7 +20,7 @@ namespace MusicService.Features.Music.CommandAndQueries.AddAlbum
         public async Task<AlbumDto> Handle(AddAlbumCommand request, CancellationToken cancellationToken)
         {
             var album = request.Album;
-            var artist = await _dbContext.Artists.FindAsync(new[] { album.ArtistId }, cancellationToken);
+            var artist = await _dbContext.Artists.FindAsync(new object[]{ album.ArtistId.Value}, cancellationToken);
             if (artist is null)
             {
                 throw new UnprocessibleEntityException($"Artist with Id {album.ArtistId} could not be found");
