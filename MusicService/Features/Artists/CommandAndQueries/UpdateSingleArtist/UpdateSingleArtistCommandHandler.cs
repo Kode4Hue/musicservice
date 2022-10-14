@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MusicService.Features.Artists.Extensions;
 using MusicService.Features.Common;
+using MusicService.Features.Common.Exceptions;
 using MusicService.Features.Common.Persistence;
 using MusicService.SharedLibrary.Artists.Dtos;
 

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using MusicService.Features.Artists.Domain.Entities;
 using MusicService.Features.Common;
+using MusicService.Features.Common.Exceptions;
 using MusicService.Features.Common.Persistence;
 
 namespace MusicService.Features.Artists.CommandAndQueries.DeleteSingleArtist
