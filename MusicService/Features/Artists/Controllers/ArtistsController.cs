@@ -5,8 +5,8 @@ using MusicService.Features.Artists.CommandAndQueries.DeleteSingleArtist;
 using MusicService.Features.Artists.CommandAndQueries.GetArtists;
 using MusicService.Features.Artists.CommandAndQueries.GetSingleArtist;
 using MusicService.Features.Artists.CommandAndQueries.UpdateSingleArtist;
-using MusicService.Features.Common;
 using MusicService.Features.Common.Controllers;
+using MusicService.Features.Common.Exceptions;
 using MusicService.SharedLibrary.Artists.Dtos;
 
 namespace MusicService.Features.Artists.Controllers

@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MusicService.Features.Common.Controllers;
+using MusicService.Features.Common.Exceptions;
+using MusicService.Features.Music.CommandAndQueries.AddAlbum;
 using MusicService.Features.Music.CommandAndQueries.GetAlbums;
 using MusicService.Features.Music.CommandAndQueries.GetSingleAlbum;
 using MusicService.Features.Music.Domain.Entities;
@@ -45,7 +47,27 @@ namespace MusicService.Features.Music.Controllers
             {
                 return NotFound();
             }
+        }
 
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(AlbumDto))]
+        public async Task<IActionResult> AddAlbum(NewAlbumDto newAlbum)
+        {
+            try
+            {
+                var command = new AddAlbumCommand(newAlbum);
+                var albumCreated = await Mediator.Send(command);
+                return Ok(albumCreated);
+            }
+            catch (UnprocessibleEntityException)
+            {
+
+                return UnprocessableEntity();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }
