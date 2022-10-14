@@ -1,6 +1,7 @@
 ﻿using MusicService.Features.Artists.Domain.Entities;
 using MusicService.Features.Artists.Extensions;
 using MusicService.Features.Music.Domain.Entities;
+using MusicService.SharedLibrary.Artists.Dtos;
 using MusicService.SharedLibrary.Music.Dtos;
 
 namespace MusicService.Features.Music.Extensions
@@ -29,14 +30,33 @@ namespace MusicService.Features.Music.Extensions
             };
         }
 
-        public static Album GenerateNewModel(this NewAlbumDto album, Artist artist)
+        public static Album UpdateModelFromDto(this Album album, UpdateAlbumDto incomingUpdates)
         {
             if(album is null)
             {
                 throw new ArgumentNullException(nameof(album));
             }
 
-            if(artist is null)
+            if(incomingUpdates is null)
+            {
+                throw new ArgumentNullException(nameof(incomingUpdates));
+            }
+
+            album.Name = incomingUpdates.Name;
+            album.LastModified = DateTime.UtcNow;
+            album.ArtistId = incomingUpdates.ArtistId;
+
+            return album;
+        }
+
+        public static Album GenerateNewModel(this NewAlbumDto album, Artist artist)
+        {
+            if (album is null)
+            {
+                throw new ArgumentNullException(nameof(album));
+            }
+
+            if (artist is null)
             {
                 throw new ArgumentNullException(nameof(artist));
             }

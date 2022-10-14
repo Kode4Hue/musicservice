@@ -7,6 +7,7 @@ using MusicService.Features.Music.CommandAndQueries.AddAlbum;
 using MusicService.Features.Music.CommandAndQueries.DeleteAlbum;
 using MusicService.Features.Music.CommandAndQueries.GetAlbums;
 using MusicService.Features.Music.CommandAndQueries.GetSingleAlbum;
+using MusicService.Features.Music.CommandAndQueries.UpdateAlbum;
 using MusicService.Features.Music.Domain.Entities;
 using MusicService.SharedLibrary.Artists.Dtos;
 using MusicService.SharedLibrary.Music.Dtos;
@@ -70,10 +71,30 @@ namespace MusicService.Features.Music.Controllers
             }
         }
 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> UpdateAlbum(long id, UpdateArtistDto updateArtist)
-        //{
-        //}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateAlbum(long id, UpdateAlbumDto updateAlbum, CancellationToken cancellationToken)
+        {
+
+            try
+            {
+                var command = new UpdateSingleAlbumCommand
+                {
+                    Id = id,
+                    AlbumToUpdate = updateAlbum
+                };
+                var updatedAlbum = await Mediator.Send(command, cancellationToken);
+                return Ok(updatedAlbum);
+            }
+            catch (ResourceNotFoundException)
+            {
+
+                return NotFound();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
 
 
         [HttpDelete("{id}")]
