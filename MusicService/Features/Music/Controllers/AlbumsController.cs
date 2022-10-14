@@ -30,7 +30,6 @@ namespace MusicService.Features.Music.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AlbumDto))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetSingleAlbum(long id)
         {
             var query = new GetSingleAlbumQuery
