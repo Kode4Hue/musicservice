@@ -9,11 +9,11 @@ namespace MusicService.Features.Songs.Extensions
         public static SongDto ConvertToDto(this Song song)
         {
             return new SongDto(
-                song.Track, 
+                song.Track,
                 song.Name,
-                song.Album.ConvertToPreviewDto(), 
-                song.Id, 
-                song.Created, 
+                song.Album.ConvertToPreviewDto(),
+                song.Id,
+                song.Created,
                 song.LastModified);
         }
     }

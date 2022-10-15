@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MusicService.Features.Common.Controllers;
 using MusicService.Features.Songs.CommandAndQueries;
-using MusicService.SharedLibrary.Music.Dtos;
 using MusicService.SharedLibrary.Songs.Dtos;
 
 namespace MusicService.Features.Songs.Controllers

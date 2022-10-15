@@ -14,7 +14,7 @@ namespace MusicService.Features.Common.Persistence.Extensions
             {
                 using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
                 {
-                    if(context is not null)
+                    if (context is not null)
                     {
                         context.Database.Migrate();
 

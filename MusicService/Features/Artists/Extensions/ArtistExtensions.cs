@@ -11,16 +11,16 @@ namespace MusicService.Features.Artists.Extensions
         {
 
             return new ArtistDto(
-                artist.Name, 
+                artist.Name,
                 artist.Albums.Select(x => x.ConvertToPreviewDto()).AsEnumerable(),
                 artist.Id,
-                artist.Created, 
+                artist.Created,
                 artist.LastModified);
         }
 
         public static ArtistPreviewDto? ConvertToPreviewDto(this Artist artist)
         {
-            if(artist is null)
+            if (artist is null)
             {
                 return null;
             }
@@ -34,12 +34,12 @@ namespace MusicService.Features.Artists.Extensions
 
         public static Artist UpdateModelFromDto(this Artist artist, UpdateArtistDto incomingUpdates)
         {
-            if(artist is null)
+            if (artist is null)
             {
                 throw new ArgumentException(nameof(artist));
             }
 
-            if(incomingUpdates is null)
+            if (incomingUpdates is null)
             {
                 throw new ArgumentNullException(nameof(incomingUpdates));
             }
@@ -52,7 +52,7 @@ namespace MusicService.Features.Artists.Extensions
 
         public static Artist GenerateNewModel(this NewArtistDto artist)
         {
-            if(artist is null)
+            if (artist is null)
             {
                 throw new ArgumentNullException(nameof(artist));
             }

@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using MusicService.Features.Artists.Domain.Entities;
-using MusicService.Features.Common;
 using MusicService.Features.Common.Exceptions;
 using MusicService.Features.Common.Persistence;
 
@@ -19,7 +18,7 @@ namespace MusicService.Features.Artists.CommandAndQueries.DeleteSingleArtist
         public async Task<Unit> Handle(DeleteSingleArtistCommand request, CancellationToken cancellationToken)
         {
 
-            if(!_dbContext.Artists.Any(x => x.Id == request.Id))
+            if (!_dbContext.Artists.Any(x => x.Id == request.Id))
             {
                 throw new ResourceNotFoundException();
             }

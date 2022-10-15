@@ -19,7 +19,7 @@ namespace MusicService.Features.Music.CommandAndQueries.UpdateAlbum
         public async Task<AlbumDto> Handle(UpdateSingleAlbumCommand request, CancellationToken cancellationToken)
         {
             var album = await _dbContext.Albums.FindAsync(new object[] { request.Id }, cancellationToken);
-            if(album is not null)
+            if (album is not null)
             {
                 album = album.UpdateModelFromDto(request.AlbumToUpdate);
                 _dbContext.Entry(album).State = EntityState.Modified;

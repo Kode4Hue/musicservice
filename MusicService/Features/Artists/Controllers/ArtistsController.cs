@@ -60,7 +60,7 @@ namespace MusicService.Features.Artists.Controllers
             var createdArtist = await Mediator.Send(command, cancellationToken);
             var actionName = nameof(GetSingleArtist);
             var routeValues = new { id = createdArtist.Id };
-            return CreatedAtAction( actionName,routeValues, createdArtist);
+            return CreatedAtAction(actionName, routeValues, createdArtist);
         }
 
 
@@ -82,7 +82,7 @@ namespace MusicService.Features.Artists.Controllers
 
                 return NotFound();
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
@@ -102,7 +102,7 @@ namespace MusicService.Features.Artists.Controllers
                 await Mediator.Send(command, cancellationToken);
                 return Ok($"Deleted artist with id {id}");
             }
-            catch(ResourceNotFoundException)
+            catch (ResourceNotFoundException)
             {
                 return NotFound();
             }

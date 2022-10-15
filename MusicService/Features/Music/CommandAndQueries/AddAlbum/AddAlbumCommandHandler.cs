@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using MusicService.Features.Common.Exceptions;
 using MusicService.Features.Common.Persistence;
 using MusicService.Features.Music.Extensions;
@@ -20,7 +19,7 @@ namespace MusicService.Features.Music.CommandAndQueries.AddAlbum
         public async Task<AlbumDto> Handle(AddAlbumCommand request, CancellationToken cancellationToken)
         {
             var album = request.Album;
-            var artist = await _dbContext.Artists.FindAsync(new object[]{ album.ArtistId.Value}, cancellationToken);
+            var artist = await _dbContext.Artists.FindAsync(new object[] { album.ArtistId.Value }, cancellationToken);
             if (artist is null)
             {
                 throw new UnprocessibleEntityException($"Artist with Id {album.ArtistId} could not be found");

@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MusicService.Features.Common.Controllers;
 using MusicService.Features.Common.Exceptions;
@@ -8,10 +7,7 @@ using MusicService.Features.Music.CommandAndQueries.DeleteAlbum;
 using MusicService.Features.Music.CommandAndQueries.GetAlbums;
 using MusicService.Features.Music.CommandAndQueries.GetSingleAlbum;
 using MusicService.Features.Music.CommandAndQueries.UpdateAlbum;
-using MusicService.Features.Music.Domain.Entities;
-using MusicService.SharedLibrary.Artists.Dtos;
 using MusicService.SharedLibrary.Music.Dtos;
-using System.Security.Cryptography.X509Certificates;
 
 namespace MusicService.Features.Music.Controllers
 {
@@ -105,7 +101,7 @@ namespace MusicService.Features.Music.Controllers
             {
                 var command = new DeleteAlbumCommand
                 {
-                    Id=id
+                    Id = id
                 };
                 await Mediator.Send(command, cancellationToken);
                 return Ok($"Deleted album with id {id}");

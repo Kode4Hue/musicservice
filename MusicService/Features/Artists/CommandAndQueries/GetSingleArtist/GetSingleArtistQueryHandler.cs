@@ -16,9 +16,9 @@ namespace MusicService.Features.Artists.CommandAndQueries.GetSingleArtist
 
         public async Task<ArtistDto?> Handle(GetSingleArtistQuery request, CancellationToken cancellationToken)
         {
-            var artist = await  _dbContext.Artists.FindAsync(request.Id);
+            var artist = await _dbContext.Artists.FindAsync(request.Id);
 
-            if(artist is not null)
+            if (artist is not null)
             {
                 return artist.ConvertToDto();
             }

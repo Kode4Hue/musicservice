@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using MusicService.Features.Common.Exceptions;
 using MusicService.Features.Common.Persistence;
-using MusicService.Features.Music.Domain.Entities;
 
 namespace MusicService.Features.Music.CommandAndQueries.DeleteAlbum
 {
@@ -18,7 +17,7 @@ namespace MusicService.Features.Music.CommandAndQueries.DeleteAlbum
         public async Task<Unit> Handle(DeleteAlbumCommand request, CancellationToken cancellationToken)
         {
 
-            if(await _dbContext.Albums.AnyAsync(x => x.Id == request.Id.Value, cancellationToken) is not true)
+            if (await _dbContext.Albums.AnyAsync(x => x.Id == request.Id.Value, cancellationToken) is not true)
             {
                 throw new ResourceNotFoundException();
             }
