@@ -52,7 +52,7 @@ namespace MusicService.Features.Songs.Controllers
             return Ok(updateSong);
         }
 
-        [HttpDelete("{id")]
+        [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> DeleteSong(long id, CancellationToken cancellationToken)
         {
