@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-using MediatR;
-using MusicService.Features.Artists.CommandAndQueries.AddArtist.Validators;
+﻿using MediatR;
 using MusicService.Features.Artists.Extensions;
 using MusicService.Features.Common.Persistence;
 using MusicService.SharedLibrary.Artists.Dtos;
@@ -19,8 +17,6 @@ namespace MusicService.Features.Artists.CommandAndQueries.AddArtist
 
         public async Task<ArtistDto> Handle(AddArtistCommand request, CancellationToken cancellationToken)
         {
-            var validator = new AddArtistCommandValidator();
-            await validator.ValidateAndThrowAsync(request, cancellationToken);
             var artistModel = request.NewArtist.GenerateNewModel();
             _dbContext.Artists.Add(artistModel);
             await _dbContext.SaveChangesAsync(cancellationToken);
