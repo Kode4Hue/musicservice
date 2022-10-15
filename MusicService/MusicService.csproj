@@ -26,6 +26,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Features\Songs\Domain\" />
 	  <Folder Include="Migrations\" />
 	</ItemGroup>
 

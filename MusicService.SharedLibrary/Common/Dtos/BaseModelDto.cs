@@ -5,5 +5,12 @@
         public long Id { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
+
+        protected BaseModelDto(long id, DateTime created, DateTime lastModified)
+        {
+            Id = id;
+            Created = created;
+            LastModified = lastModified;
+        }
     }
 }

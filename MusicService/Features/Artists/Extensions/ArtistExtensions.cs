@@ -9,14 +9,13 @@ namespace MusicService.Features.Artists.Extensions
 
         public static ArtistDto ConvertToDto(this Artist artist)
         {
-            return new ArtistDto
-            {
-                Id = artist.Id,
-                Name = artist.Name,
-                Albums = artist.Albums.Select(x => x.ConvertToPreviewDto()),
-                Created = artist.Created,
-                LastModified = artist.LastModified
-            };
+
+            return new ArtistDto(
+                artist.Name, 
+                artist.Albums.Select(x => x.ConvertToPreviewDto()).AsEnumerable(),
+                artist.Id,
+                artist.Created, 
+                artist.LastModified);
         }
 
         public static ArtistPreviewDto? ConvertToPreviewDto(this Artist artist)

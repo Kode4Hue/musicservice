@@ -11,15 +11,14 @@ namespace MusicService.Features.Music.Extensions
 
         public static AlbumDto ConvertToDto(this Album album)
         {
-            return new AlbumDto
-            {
-                Id = album.Id,
-                Name = album.Name,
-                YearReleased = album.YearReleased.ToString(),
-                Artist = album.Artist.ConvertToPreviewDto(),
-                Created = album.Created,
-                LastModified = album.LastModified
-            };
+            return new AlbumDto(
+                album.Id,
+                album.Created,
+                album.LastModified,
+                album.Name,
+                album.YearReleased.ToString(),
+                album.Artist.ConvertToPreviewDto(),
+                album.Songs.Select(x => x.ConvertToPreviewDto());
         }
 
         public static AlbumPreviewDto ConvertToPreviewDto(this Album album)
