@@ -16,7 +16,7 @@ namespace MusicService.Features.Music.CommandAndQueries.GetSingleAlbum
 
         public async Task<AlbumDto?> Handle(GetSingleAlbumQuery request, CancellationToken cancellationToken)
         {
-            var album = await _dbContext.Albums.FindAsync(new[] {request.Id}, cancellationToken);
+            var album = await _dbContext.Albums.FindAsync(new object[]{request.Id}, cancellationToken);
 
             if(album is not null)
             {
