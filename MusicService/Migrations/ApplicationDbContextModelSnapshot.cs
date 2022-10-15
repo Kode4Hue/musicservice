@@ -140,8 +140,7 @@ namespace MusicService.Migrations
                     b.HasOne("MusicService.Features.Artists.Domain.Entities.Artist", "Artist")
                         .WithMany("Albums")
                         .HasForeignKey("ArtistId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Artist");
                 });
@@ -151,8 +150,7 @@ namespace MusicService.Migrations
                     b.HasOne("MusicService.Features.Music.Domain.Entities.Album", "Album")
                         .WithMany("Songs")
                         .HasForeignKey("AlbumId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Album");
                 });

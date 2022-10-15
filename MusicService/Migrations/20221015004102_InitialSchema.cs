@@ -43,7 +43,8 @@ namespace MusicService.Migrations
                         name: "FK_album_artist_artist_id",
                         column: x => x.artist_id,
                         principalTable: "artist",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,7 +66,8 @@ namespace MusicService.Migrations
                         name: "FK_song_album_album_id",
                         column: x => x.album_id,
                         principalTable: "album",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

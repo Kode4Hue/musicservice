@@ -81,7 +81,8 @@ namespace MusicService.Features.Common.Persistence
                     x.HasOne<Artist>(a => a.Artist)
                         .WithMany(b => b.Albums)
                         .HasForeignKey(c => c.ArtistId)
-                        .OnDelete(DeleteBehavior.ClientCascade);
+                        .IsRequired(false)
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity<Song>()
@@ -118,7 +119,8 @@ namespace MusicService.Features.Common.Persistence
                     x.HasOne<Album>(a => a.Album)
                         .WithMany(b => b.Songs)
                         .HasForeignKey(c => c.AlbumId)
-                        .OnDelete(DeleteBehavior.ClientCascade);
+                        .IsRequired(false)
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
 
