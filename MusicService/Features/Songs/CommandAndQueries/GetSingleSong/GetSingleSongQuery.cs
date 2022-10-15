@@ -3,11 +3,11 @@ using MusicService.SharedLibrary.Songs.Dtos;
 
 namespace MusicService.Features.Songs.CommandAndQueries.GetSingleSong
 {
-    public class GetSingleSong: IRequest<SongDto>
+    public class GetSingleSongQuery: IRequest<SongDto>
     {
         public long Id { get; set; }
 
-        public GetSingleSong(long id)
+        public GetSingleSongQuery(long id)
         {
             Id = id;
         }
