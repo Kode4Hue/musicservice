@@ -4,7 +4,7 @@ using MusicService.Features.Common.Persistence;
 using MusicService.Features.Songs.Extensions;
 using MusicService.SharedLibrary.Songs.Dtos;
 
-namespace MusicService.Features.Songs.CommandAndQueries
+namespace MusicService.Features.Songs.CommandAndQueries.GetSongs
 {
     public class GetSongQueryHandler : IRequestHandler<GetSongsQuery, List<SongDto>>
     {

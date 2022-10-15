@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using MusicService.Features.Common.Controllers;
 using MusicService.Features.Songs.CommandAndQueries;
+using MusicService.Features.Songs.CommandAndQueries.GetSingleSong;
+using MusicService.Features.Songs.CommandAndQueries.GetSongs;
+using MusicService.SharedLibrary.Music.Dtos;
 using MusicService.SharedLibrary.Songs.Dtos;
 
 namespace MusicService.Features.Songs.Controllers
@@ -20,5 +23,15 @@ namespace MusicService.Features.Songs.Controllers
             var songs = await Mediator.Send(query);
             return Ok(songs);
         }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SongDto))]
+        public async Task<IActionResult> GetSingleSong(long id, CancellationToken cancellationToken)
+        {
+            var query = new GetSingleSongQuery(id);
+            var song = await Mediator.Send(query);
+            return Ok(song);
+        }
+
     }
 }
