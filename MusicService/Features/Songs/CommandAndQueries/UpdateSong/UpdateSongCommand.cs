@@ -3,7 +3,7 @@ using MusicService.SharedLibrary.Songs.Dtos;
 
 namespace MusicService.Features.Songs.CommandAndQueries.UpdateSong
 {
-    public class UpdateSongCommand: IRequest<UpdateSongDto>
+    public class UpdateSongCommand: IRequest<SongDto>
     {
         public long Id { get; set; }
         public UpdateSongDto UpdateSongInfo { get; set; }
