@@ -1,5 +1,5 @@
-﻿using MusicService.Features.Artists.Domain.Entities;
-using MusicService.Features.Music.Extensions;
+﻿using MusicService.Features.Albums.Extensions;
+using MusicService.Features.Artists.Domain.Entities;
 using MusicService.SharedLibrary.Artists.Dtos;
 
 namespace MusicService.Features.Artists.Extensions

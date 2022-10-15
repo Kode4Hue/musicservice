@@ -1,8 +1,7 @@
 ﻿using MediatR;
+using MusicService.Features.Albums.Domain.Entities;
 using MusicService.Features.Common.Exceptions;
 using MusicService.Features.Common.Persistence;
-using MusicService.Features.Music.Domain.Entities;
-using MusicService.Features.Music.Extensions;
 using MusicService.Features.Songs.Extensions;
 using MusicService.SharedLibrary.Songs.Dtos;
 

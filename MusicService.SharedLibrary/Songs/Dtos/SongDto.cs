@@ -1,5 +1,5 @@
-﻿using MusicService.SharedLibrary.Common.Dtos;
-using MusicService.SharedLibrary.Music.Dtos;
+﻿using MusicService.SharedLibrary.Albums.Dtos;
+using MusicService.SharedLibrary.Common.Dtos;
 
 namespace MusicService.SharedLibrary.Songs.Dtos
 {

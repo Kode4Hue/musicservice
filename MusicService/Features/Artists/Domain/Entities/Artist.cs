@@ -1,5 +1,5 @@
-﻿using MusicService.Features.Common.Domain.Entities;
-using MusicService.Features.Music.Domain.Entities;
+﻿using MusicService.Features.Albums.Domain.Entities;
+using MusicService.Features.Common.Domain.Entities;
 
 namespace MusicService.Features.Artists.Domain.Entities
 {

@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MusicService.Features.Albums.Domain.Entities;
 using MusicService.Features.Artists.Domain.Entities;
 using MusicService.Features.Common.Persistence.Extensions;
-using MusicService.Features.Music.Domain.Entities;
+using MusicService.Features.Songs.Domain.Entities;
 
 namespace MusicService.Features.Common.Persistence
 {
