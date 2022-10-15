@@ -41,7 +41,7 @@ namespace MusicService.Features.Artists.Controllers
 
             if (artist is not null)
             {
-                return Ok(new ArtistDto { });
+                return Ok(artist);
             }
             else
             {
