@@ -5,7 +5,7 @@ using MusicService.Features.Songs.CommandAndQueries.AddSong;
 using MusicService.Features.Songs.CommandAndQueries.DeleteSong;
 using MusicService.Features.Songs.CommandAndQueries.GetSingleSong;
 using MusicService.Features.Songs.CommandAndQueries.GetSongs;
-using MusicService.SharedLibrary.Music.Dtos;
+using MusicService.Features.Songs.CommandAndQueries.UpdateSong;
 using MusicService.SharedLibrary.Songs.Dtos;
 
 namespace MusicService.Features.Songs.Controllers
@@ -43,6 +43,14 @@ namespace MusicService.Features.Songs.Controllers
             return StatusCode(StatusCodes.Status201Created,createdSong);
         }
 
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SongDto))]
+        public async Task<IActionResult> UpdateSong(long id, UpdateSongDto updateSongInfo, CancellationToken cancellationToken)
+        {
+            var command = new UpdateSongCommand(id, updateSongInfo);
+            var updateSong = await Mediator.Send(command, cancellationToken);
+            return Ok(updateSong);
+        }
 
         [HttpDelete("{id")]
         [ProducesResponseType(StatusCodes.Status200OK)]
