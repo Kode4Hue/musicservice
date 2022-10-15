@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using MusicService.Features.Common.Behaviours;
 using MusicService.Features.Common.Constants;
 using MusicService.Features.Common.Persistence;
 using System.Reflection;
@@ -14,6 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 builder.Services.AddDbContext<ApplicationDbContext>(a =>
 {
     a.UseSqlServer(connectionString);
