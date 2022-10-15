@@ -18,7 +18,7 @@ namespace MusicService.Features.Music.Extensions
                 album.Name,
                 album.YearReleased.ToString(),
                 album.Artist.ConvertToPreviewDto(),
-                album.Songs.Select(x => x.ConvertToPreviewDto());
+                album.Songs.Select(x => x.ConvertToPreviewDto()));
         }
 
         public static AlbumPreviewDto ConvertToPreviewDto(this Album album)
