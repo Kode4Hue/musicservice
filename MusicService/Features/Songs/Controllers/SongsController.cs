@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MusicService.Features.Common.Controllers;
 using MusicService.Features.Songs.CommandAndQueries.AddSong;
+using MusicService.Features.Songs.CommandAndQueries.DeleteSong;
 using MusicService.Features.Songs.CommandAndQueries.GetSingleSong;
 using MusicService.Features.Songs.CommandAndQueries.GetSongs;
 using MusicService.SharedLibrary.Music.Dtos;
@@ -42,5 +43,14 @@ namespace MusicService.Features.Songs.Controllers
             return StatusCode(StatusCodes.Status201Created,createdSong);
         }
 
+
+        [HttpDelete("{id")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> DeleteSong(long id, CancellationToken cancellationToken)
+        {
+            var command = new DeleteSongCommand(id);
+            await Mediator.Send(command, cancellationToken);
+            return Ok($"Deleted song with id {id}");
+        }
     }
 }
