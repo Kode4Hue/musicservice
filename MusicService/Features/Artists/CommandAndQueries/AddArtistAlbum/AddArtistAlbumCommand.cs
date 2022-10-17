@@ -7,6 +7,6 @@ namespace MusicService.Features.Artists.CommandAndQueries.AddArtistAlbum
     public class AddArtistAlbumCommand: IRequest<AlbumDto>
     {
         public long ArtistId { get; set; }
-        public NewArtistAlbumDto NewArtistAlbum { get; set; }
+        public long AlbumId { get; set; }
     }
 }

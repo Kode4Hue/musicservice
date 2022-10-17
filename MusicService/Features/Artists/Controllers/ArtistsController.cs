@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MusicService.Features.Artists.CommandAndQueries.AddArtist;
 using MusicService.Features.Artists.CommandAndQueries.AddArtistAlbum;
+using MusicService.Features.Artists.CommandAndQueries.DeleteArtistAlbum;
 using MusicService.Features.Artists.CommandAndQueries.DeleteSingleArtist;
 using MusicService.Features.Artists.CommandAndQueries.GetArtists;
 using MusicService.Features.Artists.CommandAndQueries.GetSingleArtist;
@@ -67,12 +68,12 @@ namespace MusicService.Features.Artists.Controllers
 
         [HttpPost("{id}/AddAlbum")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(AlbumDto))]
-        public async Task<IActionResult> AddArtistAlbum(long artistId, NewArtistAlbumDto newArtistAlbum, CancellationToken cancellationToken)
+        public async Task<IActionResult> AddArtistAlbum(long id, long albumId, CancellationToken cancellationToken)
         {
             var command = new AddArtistAlbumCommand
             {
-                ArtistId = artistId,
-                NewArtistAlbum = newArtistAlbum
+                ArtistId = id,
+                AlbumId = albumId
             };
 
             var album = await Mediator.Send(command, cancellationToken);
@@ -127,6 +128,19 @@ namespace MusicService.Features.Artists.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
+        [HttpDelete("{id}/albums/{albumId}")]
+        public async Task<IActionResult> DeleteArtistAlbum (long id, long albumId, CancellationToken cancellationToken)
+        {
+            var command = new DeleteArtistAlbumCommand
+            {
+                ArtistId = id,
+                AlbumId = albumId
+            };
+            await Mediator.Send(command, cancellationToken);
+            return Ok();
+        }
+
     }
 
 }

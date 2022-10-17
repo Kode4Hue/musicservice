@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicService.SharedLibrary.Albums.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,6 @@ namespace MusicService.SharedLibrary.Artists.Dtos
 {
     public class NewArtistAlbumDto
     {
-        public long ArtistId { get; set; }
-        public long AlbumId { get; set; }
+        public AlbumDto Album { get; set; }
     }
 }

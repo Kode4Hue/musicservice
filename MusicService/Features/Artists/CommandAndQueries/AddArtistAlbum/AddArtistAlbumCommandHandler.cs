@@ -20,12 +20,12 @@ namespace MusicService.Features.Artists.CommandAndQueries.AddArtistAlbum
         public async Task<AlbumDto> Handle(AddArtistAlbumCommand request, CancellationToken cancellationToken)
         {
             if(!await _dbContext.ArtistAlbums.AnyAsync(x => x.ArtistId == request.ArtistId 
-            && x.AlbumId == request.NewArtistAlbum.AlbumId, cancellationToken))
+            && x.AlbumId == request.AlbumId, cancellationToken))
             {
                 var model = new ArtistAlbum
                 {
                     AlbumId = request.ArtistId,
-                    ArtistId = request.NewArtistAlbum.AlbumId,
+                    ArtistId = request.AlbumId,
                 };
 
                 _dbContext.ArtistAlbums.Add(model);
@@ -42,7 +42,7 @@ namespace MusicService.Features.Artists.CommandAndQueries.AddArtistAlbum
             else
             {
                 throw new UnprocessibleEntityException($"Artist Album with Artist Id {request.ArtistId} and Album  " +
-                    $"Id {request.NewArtistAlbum.AlbumId} already exists");
+                    $"Id {request.AlbumId} already exists");
             }
         }
     }
