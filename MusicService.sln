@@ -5,7 +5,9 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicService", "MusicService\MusicService.csproj", "{19BF8AD6-2E31-4352-BC10-DDC08B0556E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicService.SharedLibrary", "MusicService.SharedLibrary\MusicService.SharedLibrary.csproj", "{B7A8CB42-E1F8-4DB8-ABEC-6A3199CA2FC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicService.SharedLibrary", "MusicService.SharedLibrary\MusicService.SharedLibrary.csproj", "{B7A8CB42-E1F8-4DB8-ABEC-6A3199CA2FC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicService.Tests", "MusicService.Tests\MusicService.Tests.csproj", "{B331E0B7-AEFE-4199-9A6E-3261F2F23ED5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B7A8CB42-E1F8-4DB8-ABEC-6A3199CA2FC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7A8CB42-E1F8-4DB8-ABEC-6A3199CA2FC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7A8CB42-E1F8-4DB8-ABEC-6A3199CA2FC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B331E0B7-AEFE-4199-9A6E-3261F2F23ED5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B331E0B7-AEFE-4199-9A6E-3261F2F23ED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B331E0B7-AEFE-4199-9A6E-3261F2F23ED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B331E0B7-AEFE-4199-9A6E-3261F2F23ED5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

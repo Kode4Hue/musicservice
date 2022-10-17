@@ -1,12 +1,14 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MusicService.Features.Artists.CommandAndQueries.AddArtist;
+using MusicService.Features.Artists.CommandAndQueries.AddArtistAlbum;
 using MusicService.Features.Artists.CommandAndQueries.DeleteSingleArtist;
 using MusicService.Features.Artists.CommandAndQueries.GetArtists;
 using MusicService.Features.Artists.CommandAndQueries.GetSingleArtist;
 using MusicService.Features.Artists.CommandAndQueries.UpdateSingleArtist;
 using MusicService.Features.Common.Controllers;
 using MusicService.Features.Common.Exceptions;
+using MusicService.SharedLibrary.Albums.Dtos;
 using MusicService.SharedLibrary.Artists.Dtos;
 
 namespace MusicService.Features.Artists.Controllers
@@ -61,6 +63,20 @@ namespace MusicService.Features.Artists.Controllers
             var actionName = nameof(GetSingleArtist);
             var routeValues = new { id = createdArtist.Id };
             return CreatedAtAction(actionName, routeValues, createdArtist);
+        }
+
+        [HttpPost("{id}/AddAlbum")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(AlbumDto))]
+        public async Task<IActionResult> AddArtistAlbum(long artistId, NewArtistAlbumDto newArtistAlbum, CancellationToken cancellationToken)
+        {
+            var command = new AddArtistAlbumCommand
+            {
+                ArtistId = artistId,
+                NewArtistAlbum = newArtistAlbum
+            };
+
+            var album = await Mediator.Send(command, cancellationToken);
+            return StatusCode(StatusCodes.Status201Created, album);
         }
 
 

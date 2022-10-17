@@ -18,7 +18,6 @@ namespace MusicService.Features.Albums.Extensions
                 album.LastModified,
                 album.Name,
                 album.YearReleased.ToString(),
-                album.Artist.ConvertToPreviewDto(),
                 album.Songs.Select(x => x.ConvertToPreviewDto()));
         }
 
@@ -46,7 +45,6 @@ namespace MusicService.Features.Albums.Extensions
 
             album.Name = incomingUpdates.Name;
             album.LastModified = DateTime.UtcNow;
-            album.ArtistId = incomingUpdates.ArtistId;
 
             return album;
         }
@@ -71,7 +69,6 @@ namespace MusicService.Features.Albums.Extensions
                 YearReleased = album.YearReleased.Value,
                 Created = currentDate,
                 LastModified = currentDate,
-                Artist = artist
             };
         }
     }

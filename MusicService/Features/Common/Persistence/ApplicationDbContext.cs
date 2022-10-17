@@ -10,11 +10,12 @@ namespace MusicService.Features.Common.Persistence
     {
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Album> Albums { get; set; }
+
+        public DbSet<ArtistAlbum> ArtistAlbums { get; set; }
         public DbSet<Song> Songs { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,9 +28,9 @@ namespace MusicService.Features.Common.Persistence
                     x.ToTable("artist");
                     x.HasKey(a => a.Id);
                     x.Property(a => a.Id)
-                        .HasColumnName("id");
+                        .ValueGeneratedNever();
                     x.Property(a => a.Id)
-                        .ValueGeneratedOnAdd();
+                        .HasColumnName("id");
                     x.Property(a => a.Name)
                         .HasColumnName("name");
                     x.Property(a => a.Name)
@@ -56,7 +57,7 @@ namespace MusicService.Features.Common.Persistence
                         .HasColumnName("id");
                     x.HasKey(a => a.Id);
                     x.Property(a => a.Id)
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedNever();
                     x.Property(a => a.Name)
                         .HasColumnName("name");
                     x.Property(a => a.Name)
@@ -77,13 +78,23 @@ namespace MusicService.Features.Common.Persistence
                         .IsRequired();
                     x.Property(a => a.LastModified)
                         .HasDefaultValueSql("getutcdate()");
+                });
+
+            modelBuilder.Entity<ArtistAlbum>()
+                .Configure(x =>
+                {
+                    x.ToTable("artist_albums");
+                    x.HasKey(aa => new { aa.ArtistId, aa.AlbumId });
+                    x.HasOne(aa => aa.Artist)
+                     .WithMany(a => a.ArtistAlbums)
+                     .HasForeignKey(aa => aa.ArtistId);
+                    x.HasOne(aa => aa.Album)
+                     .WithMany(a => a.ArtistAlbums)
+                     .HasForeignKey(aa => aa.AlbumId);
                     x.Property(a => a.ArtistId)
-                        .HasColumnName("artist_id");
-                    x.HasOne<Artist>(a => a.Artist)
-                        .WithMany(b => b.Albums)
-                        .HasForeignKey(c => c.ArtistId)
-                        .IsRequired(false)
-                        .OnDelete(DeleteBehavior.Cascade);
+                     .HasColumnName("artist_id");
+                    x.Property(a => a.AlbumId)
+                     .HasColumnName("albums_id");
                 });
 
             modelBuilder.Entity<Song>()
@@ -94,7 +105,7 @@ namespace MusicService.Features.Common.Persistence
                         .HasColumnName("id");
                     x.HasKey(a => a.Id);
                     x.Property(a => a.Id)
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedNever();
                     x.Property(a => a.Track)
                         .HasColumnName("track");
                     x.Property(a => a.Track)
@@ -123,8 +134,6 @@ namespace MusicService.Features.Common.Persistence
                         .IsRequired(false)
                         .OnDelete(DeleteBehavior.Cascade);
                 });
-
-
         }
     }
 }

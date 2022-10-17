@@ -9,8 +9,7 @@ namespace MusicService.Features.Albums.Domain.Entities
         public string Name { get; set; } = string.Empty;
         public int YearReleased { get; set; }
 
-        public long ArtistId { get; set; }
-        public Artist Artist { get; set; }
-        public ICollection<Song> Songs { get; set; }
+        public ICollection<ArtistAlbum> ArtistAlbums { get; set; } = new List<ArtistAlbum>();
+        public ICollection<Song> Songs { get; set; } = new List<Song>();
     }
 }

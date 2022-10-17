@@ -6,6 +6,11 @@
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
 
+        public BaseModelDto()
+        {
+
+        }
+
         protected BaseModelDto(long id, DateTime created, DateTime lastModified)
         {
             Id = id;

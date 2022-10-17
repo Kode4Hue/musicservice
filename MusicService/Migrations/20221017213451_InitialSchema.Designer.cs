@@ -12,7 +12,7 @@ using MusicService.Features.Common.Persistence;
 namespace MusicService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221015004102_InitialSchema")]
+    [Migration("20221017213451_InitialSchema")]
     partial class InitialSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,49 +24,11 @@ namespace MusicService.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("MusicService.Features.Artists.Domain.Entities.Artist", b =>
+            modelBuilder.Entity("MusicService.Features.Albums.Domain.Entities.Album", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("Created")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasColumnName("created")
-                        .HasDefaultValueSql("getutcdate()");
-
-                    b.Property<DateTime>("LastModified")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasColumnName("last_modified")
-                        .HasDefaultValueSql("getutcdate()");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("artist", (string)null);
-                });
-
-            modelBuilder.Entity("MusicService.Features.Music.Domain.Entities.Album", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<long>("ArtistId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("artist_id");
 
                     b.Property<DateTime>("Created")
                         .ValueGeneratedOnAdd()
@@ -91,19 +53,59 @@ namespace MusicService.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArtistId");
-
                     b.ToTable("album", (string)null);
                 });
 
-            modelBuilder.Entity("MusicService.Features.Music.Domain.Entities.Song", b =>
+            modelBuilder.Entity("MusicService.Features.Artists.Domain.Entities.Artist", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                    b.Property<DateTime>("Created")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("created")
+                        .HasDefaultValueSql("getutcdate()");
+
+                    b.Property<DateTime>("LastModified")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("last_modified")
+                        .HasDefaultValueSql("getutcdate()");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("artist", (string)null);
+                });
+
+            modelBuilder.Entity("MusicService.Features.Artists.Domain.Entities.ArtistAlbum", b =>
+                {
+                    b.Property<long>("ArtistId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("artist_id");
+
+                    b.Property<long>("AlbumId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("albums_id");
+
+                    b.HasKey("ArtistId", "AlbumId");
+
+                    b.HasIndex("AlbumId");
+
+                    b.ToTable("artist_albums", (string)null);
+                });
+
+            modelBuilder.Entity("MusicService.Features.Songs.Domain.Entities.Song", b =>
+                {
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     b.Property<long>("AlbumId")
                         .HasColumnType("bigint")
@@ -137,19 +139,28 @@ namespace MusicService.Migrations
                     b.ToTable("song", (string)null);
                 });
 
-            modelBuilder.Entity("MusicService.Features.Music.Domain.Entities.Album", b =>
+            modelBuilder.Entity("MusicService.Features.Artists.Domain.Entities.ArtistAlbum", b =>
                 {
+                    b.HasOne("MusicService.Features.Albums.Domain.Entities.Album", "Album")
+                        .WithMany("ArtistAlbums")
+                        .HasForeignKey("AlbumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MusicService.Features.Artists.Domain.Entities.Artist", "Artist")
-                        .WithMany("Albums")
+                        .WithMany("ArtistAlbums")
                         .HasForeignKey("ArtistId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Album");
 
                     b.Navigation("Artist");
                 });
 
-            modelBuilder.Entity("MusicService.Features.Music.Domain.Entities.Song", b =>
+            modelBuilder.Entity("MusicService.Features.Songs.Domain.Entities.Song", b =>
                 {
-                    b.HasOne("MusicService.Features.Music.Domain.Entities.Album", "Album")
+                    b.HasOne("MusicService.Features.Albums.Domain.Entities.Album", "Album")
                         .WithMany("Songs")
                         .HasForeignKey("AlbumId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -157,14 +168,16 @@ namespace MusicService.Migrations
                     b.Navigation("Album");
                 });
 
-            modelBuilder.Entity("MusicService.Features.Artists.Domain.Entities.Artist", b =>
+            modelBuilder.Entity("MusicService.Features.Albums.Domain.Entities.Album", b =>
                 {
-                    b.Navigation("Albums");
+                    b.Navigation("ArtistAlbums");
+
+                    b.Navigation("Songs");
                 });
 
-            modelBuilder.Entity("MusicService.Features.Music.Domain.Entities.Album", b =>
+            modelBuilder.Entity("MusicService.Features.Artists.Domain.Entities.Artist", b =>
                 {
-                    b.Navigation("Songs");
+                    b.Navigation("ArtistAlbums");
                 });
 #pragma warning restore 612, 618
         }

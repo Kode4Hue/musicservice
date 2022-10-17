@@ -12,7 +12,6 @@ namespace MusicService.Features.Artists.Extensions
 
             return new ArtistDto(
                 artist.Name,
-                artist.Albums.Select(x => x.ConvertToPreviewDto()).AsEnumerable(),
                 artist.Id,
                 artist.Created,
                 artist.LastModified);
